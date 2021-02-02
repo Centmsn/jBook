@@ -18,4 +18,4 @@ This feature allows code sharing with other developers.
 
 ### Live transpiling
 
-The project is using ESBuild to transpile user code (JSX for example) to plain Javascript.
+The project is using ESBuild to transpile user code (JSX for example) to plain Javascript live in the browser.
