@@ -5,11 +5,12 @@ import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
 
 import CodeEditor from "./components/CodeEditor";
+import Preview from "./components/Preview";
 
 function App() {
   const ref = useRef<any>(null);
-  const iframeRef = useRef<any>(null);
   const [input, setInput] = useState("");
+  const [code, setCode] = useState("");
 
   useEffect(() => {
     startService();
@@ -25,8 +26,6 @@ function App() {
   const handleOnClick = async () => {
     if (!ref.current) return;
 
-    iframeRef.current.srcdoc = html;
-
     const result = await ref.current.build({
       entryPoints: ["index.js"],
       bundle: true,
@@ -38,53 +37,18 @@ function App() {
       },
     });
 
-    iframeRef.current.contentWindow.postMessage(
-      result.outputFiles[0].text,
-      "*"
-    );
+    setCode(result.outputFiles[0].text);
   };
-
-  const html = `
-  <html>
-    <head></head>
-    <body>
-      <div id="root"></div>
-      <script>
-        window.addEventListener("message", (event) => {
-          try {
-            eval(event.data)
-          } catch(err) {
-            const root = document.getElementById("root")
-            root.innerHTML = "<div style='color: red;'>" + err + "</div>"
-            throw err
-          }
-
-        }, false)
-      </script>
-    </body>
-  </html>
-`;
 
   return (
     <div className="App">
-      <CodeEditor
-        initialValue={"dsadsada"}
-        onChange={(value) => setInput(value)}
-      />
-      <textarea
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      ></textarea>
+      <CodeEditor initialValue={""} onChange={(value) => setInput(value)} />
+
       <div>
         <button onClick={handleOnClick}>Submit</button>
       </div>
 
-      <iframe
-        ref={iframeRef}
-        srcDoc={html}
-        title="editor"
-        sandbox="allow-scripts"
-      ></iframe>
+      <Preview code={code} />
     </div>
   );
 }
