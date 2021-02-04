@@ -26,7 +26,7 @@ export const moveCell = (id: string, direction: Direction) => {
   };
 };
 
-export const insterCellBefore = (id: string, type: CellTypes) => {
+export const insertCellBefore = (id: string | null, type: CellTypes) => {
   return {
     type: ActionTypes.INSERT_CELL_BEFORE,
     payload: {
