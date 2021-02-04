@@ -19,7 +19,7 @@ interface DeleteCellAction {
 interface InsertCellBeforeAction {
   type: ActionTypes.INSERT_CELL_BEFORE;
   payload: {
-    id: string;
+    id: string | null;
     type: CellTypes;
   };
 }
