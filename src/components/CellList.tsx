@@ -1,3 +1,5 @@
+import "./celllist.css";
+
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { Fragment } from "react";
 import CellListItem from "./CellListItem";
@@ -18,7 +20,7 @@ const CellList: React.FC = () => {
   ));
 
   return (
-    <div>
+    <div className="cell-list">
       <AddCell prevCellId={null} forceVisible={cells.length === 0} />
       {renderedCells}
     </div>
