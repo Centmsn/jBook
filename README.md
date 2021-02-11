@@ -14,7 +14,9 @@ and start using it in Your project!
 Code that You write can be saved to the file on Your machine and then loaded back to the app.
 This feature allows code sharing with other developers.
 
-### How to use?
+### Ready to publish
+
+Project is ready to publish to npm. There are 3 separated packages which depend on each other.
 
 ### Live transpiling
 
